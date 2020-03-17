@@ -1,0 +1,5 @@
+default_branch = "master"
+
+[rules.docs]
+root = "docs/"
+command = "ls"

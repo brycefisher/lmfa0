@@ -1,7 +1,3 @@
-// TODOs
-//  5 - record a ref in a file listed in Config
-//  6 - Make the location of the repo configurable
-
 use std::process::{self, Command};
 
 use git2::Repository;
@@ -15,26 +11,32 @@ type Error = Box<dyn std::error::Error>;
 type Result<T> = std::result::Result<T, Error>;
 
 fn main() -> Result<()> {
-    let rule_name = std::env::args().nth(1).ok_or("Must provide a rule")?;
+    // Read in 1 required argument -- the name of a rule to execute
+    let rule_name = std::env::args()
+        .nth(1)
+        .ok_or("Must provide a rule")?;
 
+    // Read in config
     let repo = match Repository::open(".") {
         Ok(repo) => repo,
         Err(e) => panic!("failed to open: {}", e),
     };
-
-    // Read in config
     let config = Config::load()?;
     let rule = config.get(&rule_name).ok_or("Rule not found inside lmfa0.toml")?;
 
-    // TODO - figure out how to support nonbranch refs
-    let base_tree = config.base(".lmfao".as_ref(), &repo)?;
+    // Determine our last successful run for this rule
+    let base_tree = config.base(&rule_name, &repo)?;
 
+    // See if any changes have happened in our "root" since last change
     let diff = repo.diff_tree_to_workdir_with_index(Some(&base_tree), None)?;
     if diff::rule_triggered(&rule.root, diff) {
         eprintln!("At least one path triggered");
         let pieces: Vec<_> = rule.command.split_whitespace().collect();
         if let ([bin], args) = pieces.split_at(1) {
             let status = Command::new(bin).args(args).status()?;
+            if status.success() {
+                config.store(&rule_name, &repo)?;
+            }
             if let Some(code) = status.code() {
                 process::exit(code);
             }
