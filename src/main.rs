@@ -1,9 +1,8 @@
 // TODOs
-//  1 - parse args for path
-//  2 - parse args for action
 //  5 - record a ref in a file listed in Config
 //  6 - Make the location of the repo configurable
 
+use std::process::{Command, Stdio};
 
 use git2::Repository;
 
@@ -33,6 +32,16 @@ fn main() -> Result<()> {
     let diff = repo.diff_tree_to_workdir_with_index(Some(&base_tree), None)?;
     if diff::rule_triggered(&rule.root, diff) {
         println!("At least one path triggered");
+        let pieces: Vec<_> = rule.command.split_whitespace().collect();
+        if let ([bin], args) = pieces.split_at(1) {
+            Command::new(bin)
+                .args(args)
+                .stdout(Stdio::inherit())
+                .stderr(Stdio::inherit())
+                .output()?;
+        } else {
+            println!("No command specified for {}", &rule_name);
+        }
     } else {
         println!("No changes");
     }
