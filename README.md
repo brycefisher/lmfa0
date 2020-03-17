@@ -8,6 +8,8 @@
  - Only build/deploy documentation when the docs/ directory changes
  - Only test a portion of mono-repo when that microservice changes
 
+**Warning: 0% test coverage today. Because 0 tests today. It works on my machine**
+
 ## Installation
 
 Currently requires building using `cargo`:
@@ -68,6 +70,24 @@ This executes a rule named "doc" (see example above):
 ```
 $ lmfa0 doc
 ```
+
+## Contributions Welcome
+
+If you're interested in this project, feel free to open an issue and propose your idea.
+
+### Particular Contributions of Interest
+
+ * Sexy documentation site (a la gitlab pages)
+ * Cucmber tests
+ * Unit tests
+ * Code coverage
+ * Config options for:
+   * Making `root` into a glob to only consider file suffixes
+   * Configuring repo location
+   * A way to build a DAG by composing rules together (similar to Make)
+ * Posting to Reddit
+ * Blogging about this project!
+ * Contriving a meaning for this an acronym?
 
 ## License
 
