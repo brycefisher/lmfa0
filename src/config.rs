@@ -8,9 +8,9 @@ use serde::Deserialize;
 use crate::Result;
 
 #[derive(Debug, Deserialize)]
-struct Rule {
-    command: String,
-    root: PathBuf,
+pub struct Rule {
+    pub command: String,
+    pub root: PathBuf,
 }
 
 #[serde(default)]
@@ -50,5 +50,9 @@ impl Config {
                 Ok(r#ref.peel_to_tree()?)
             }
         }
+    }
+
+    pub fn get(&self, rule: &str) -> Option<&Rule> {
+        self.rules.get(rule)
     }
 }
