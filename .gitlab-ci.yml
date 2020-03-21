@@ -1,0 +1,23 @@
+default:
+  image: 'rust:1.42.0-slim-buster'
+
+stages:
+  - build
+
+compile_check:
+  stage: build
+  script: cargo build --release
+  except:
+    - tags
+
+compile_release:
+  stage: build
+  script:
+    - cargo build --release
+    - strip target/release/lmfa0
+    - size target/release/lmfa0
+  only:
+    - tags
+  artifacts:
+    paths:
+      - target/release/lmfa0
