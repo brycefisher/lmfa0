@@ -1,2 +1,9 @@
+# Cargo build files
 /target
+
+# lmfa0's detritus
 .lmfa0/
+
+# standard-version flotsam for automagic changelog generation
+package-lock.json
+node_modules/

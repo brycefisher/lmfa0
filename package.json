@@ -1,0 +1,17 @@
+{
+  "standard-version": {
+    "packageFiles": [
+      {
+        "filename": "Cargo.toml",
+        "updater": "standard-version-updater.js"
+      }
+    ]
+  },
+  "repository": {
+    "url": "https://gitlab.com/bff/lmfa0"
+  },
+  "dependencies": {
+    "@iarna/toml": "^2.2.3",
+    "standard-version": "^7.1.0"
+  }
+}
