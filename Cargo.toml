@@ -1,8 +1,15 @@
 [package]
 name = "lmfa0"
-version = "0.1.0"
+version = "0.0.1"
 authors = ["Bryce Fisher-Fleig <brycefisher@users.noreply.github.com>"]
 edition = "2018"
+readme = "README.md"
+repository = "https://gitlab.com/bff/lmfa0"
+license = "Apache-2.0"
+
+[badges]
+gitlab = { repository = "bff/lmfa0", branch = "master" }
+maintenance = { status = "actively-developed" }
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
