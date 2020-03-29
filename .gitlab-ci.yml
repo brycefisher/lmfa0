@@ -18,7 +18,7 @@ pages:
     - export PATH="~/.cargo/bin:$PATH"
     - cd docs && zola build --output-dir ../public/
   artifacts:
-    paths: ['pages/']
+    paths: ['public/']
   only:
     - master
 
