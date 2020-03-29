@@ -1,0 +1,189 @@
+<!doctype HTML>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <title>lmfa0: Only CI when you must</title>
+    <link rel="stylesheet" href="vendor/skeleton/v2.0.4/normalize.css">
+    <link rel="stylesheet" href="vendor/skeleton/v2.0.4/skeleton.css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="container">
+      <div class="row">
+        <div class="nine columns"><img src="logo-small.png" alt="lmfa0" id="logo"></div>
+        <div class="three columns">
+          <a href="https://gitlab/bff/lmfa0">gitlab</a> |
+          <a href="https://gitlab.com/bff/lmfa0/-/jobs/artifacts/v0.0.1/download?job=compile_release">download</a>
+        </div>
+      </div>
+    </header>
+
+    <div id="hero">
+      <object type="image/svg+xml" data="core-use-case-diagram.svg"></object>
+    </div>
+
+    <div id="concept">
+      <h2><code>lmfa0</code> connects diff paths to shell commands to make CI fast</h2>
+    </div>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="three columns">
+          <h4>Conditional Execution</h3>
+          <p>lmfa0 gives you the ability to eliminate trivially pointless script executions in CI that would be difficult to express otherwise.</p>
+        </div>
+
+
+        <div class="three columns">
+          <h4>Smart Diffing</h3>
+          <p>lmfa0 exploits your CI cache to remember the last time it successfully executed a command for that specific path on your current branch.</p>
+        </div>
+
+        <div class="three columns">
+          <h4>Treat Paths Individually</h4>
+          <p>Create as many rules as you want for different paths in your repository to maximize the benefits of lmfa0</p>
+        </div>
+
+        <div class="three columns">
+          <h4>Easy Deployment</h4>
+          <p>lmfa0 is a compiled Rust program with no runtime dependency's except glibc. No need to setup Python, Node, Ruby, or JVM.</p>
+        </div>
+
+      </div>
+      <div class="row" id="use-cases">
+        <h3>Use Cases</h3>
+      </div>
+      <div class="row">
+        <p class="four columns">Only changing your TypeScript backend server, but don't want to wait for webpack to rebuild and test your React SPA? lmfa0's got your back.</p>
+        <p class="four columns">Tweaking your firewall rules in your terraform, but don't want to wait for all the frontend and backend tests to run? lmfa0's got your back</p>
+        <p class="four columns">Pushing a change to your style guide shouldn't mean waiting 45 minutes for ALL the integration tests, build steps, and infrastructure checkins to complete.</p>
+      </div>
+
+      <div class="row">
+        <h3>How It Works</h3>
+        <ul>
+          <li>You create "rules" that connect a root path to a shell command</li>
+          <li>When lmfa0 is invoked with a rule, it will create a diff from its last run on this branch</li>
+          <li>If any files changed in that diff matching the root path, lmfa0 runs the command</li>
+          <li>Finally lmfa0 updates its record of the last successful run for that rule in the .lmfa0/ directory</li>
+        </ul>
+      </div>
+
+      <div id="usage">
+        <h3>Installation</h3>
+        <ol>
+          <li class="row">
+            <p>Download the latest binary in your CI</p>
+<pre><code># .circleci/config.yaml
+- run:
+    name: Install lmfa0
+    command: |
+      curl -sSLo lmfa0.zip https://gitlab.com/bff/lmfa0/-/jobs/artifacts/v0.0.1/download?job=compile_release
+      mkdir -p $HOME/.cargo/bin
+      unzip -j lmfa0.zip -d $HOME/.cargo/bin/
+      rm lmfa0.zip</code></pre>
+          </li>
+          <li class="row">
+            <p>Have CI save and restore your .lmfa0/ directory</p>
+<pre><code>{% raw %}# .circleci/config.yaml
+- restore_cache:
+    name: Restore lmfa0 cache
+    key: lmfa0-{{ .Branch }}
+
+- save_cache:
+    key: lmfa0-{{ .Branch }}
+    paths:
+      - /home/circleci/project/.lmfa0/{% endraw %}</code></pre>
+          </li>
+          <li class="row">
+            <p>Create a lmfa0.toml file</p>
+          </li>
+        </ol>
+        <h3>Usage</h3>
+        <ol>
+          <li class="row">
+            <p>Add an rule to lmfa0.toml for a path you want to trigger only onchange</p>
+<pre><code># lmfa0.toml
+[rules.terraform]
+root = "terraform/"
+command = "terraform apply"</code></pre>
+          </li>
+          <li class="row">
+            <p>Invoke lmfa0 with rule name inside your CI</p>
+<pre><code># .circleci/config.yaml
+# restore_cache above here
+
+- run:
+    name: Apply Terraform
+    command: lmfa0 terraform
+
+# save_cache below here</code></pre>
+          </li>
+        </ol>
+      </div>
+
+      <div class="row">
+        <h3>FAQ</h3>
+        <dl>
+          <dt>Why do you need lmfa0 to generate this diff?</dt>
+          <dd>
+            <p>lmfa0 solves the problem of figuring out what to diff against in two important cases:
+            within a branch and at merge-time across branches.</p>
+            <p>Within a branch, lmfa0 can gate CI steps to only rerun jobs that have changed since your last push
+            speeding up your iteration. If you simply used the logic
+            <code>if [[ -n "$(git diff master -- terraform/)"]]</code> you would rerun unnecessary steps 
+            from one push to the next within that branch.</p>
+            <p>At merge time, CI generally doesn't know where the head of master (or any other branch!) was
+            prior to the merge. This makes it very tough to determine what changed inside a PR from a script
+            in CI. lmfa0 remembers this information by storing in a per-branch cache because lmfa0 stores the git
+            sha of the last successful run. Diffing between two git shas is easy, and lmfa0 does this part
+            for you too.</p>
+          </dd>
+          <dt>What if my script fails when lmfa0 runs it?</dt>
+          <dd><p>lmfa0 will propagate whatever exit code your shell command returns as it own exit code.
+          This makes it safe to use lmfa0 to start your test suite. However, lmfa0 will <em>not</em>
+          update the git sha for the last run. (If you need control over whether the git sha is updated
+          for nonzero exit codes, file an issue and I'll happy add this feature.)</p></dd>
+          <dt>Isn't this potentially dangerous?</dt>
+          <dd>
+            <p>Yes! You need understand your own CI pipelines well enough to know when lmfa0 is a sane
+            optimistization. Here's how I try to discover a "safe" bit of my CI to use lmfa0 on:</p>
+            <ul>
+              <li>Look through the timing on your recent CI jobs for a slow step</li>
+              <li>Try to identify CI runs where that step didn't need to execute</li>
+              <li>Ask yourself if you can determine purely based on paths in a diff if you could safely determine
+                whether or not that step needed to execute</li>
+              <li>Experiment with using an lmfa0 rule on that step instead of directly running whatever command exists</li>
+            </ul>
+            <p>Sometimes it's also possible to decouple bits of your CI so that it becomes safe to use lmfa0.
+            A simple example would be reorganizing your directory structure so that you can craft a rule
+            to target two logic components of your repo with separate lmfa0 rules. A more complex Rust-specific
+            example would be separating concerns into different crates within a workspace.</p>
+          </dd>
+          <dt>Why can't I use environment variables in lmfa0 <code>command</code>s?</dt>
+          <dd>
+            <p>lmfa0 is at an early stage of development and it was easier to skip this feature. If you would like to contribute this feature, open a pull request!</p>
+            <p>As a workaround, lmfa0 will pass its environment to the command it executes, so create a shell script for lmfa0 to run which uses environment variables. Then have lmfa0 use your shell script as the command</p>
+          </dd>
+        </dl>
+      </div>
+
+      <div class="row">
+        <h3>Next Steps</h3>
+        <p>
+          <a href="https://gitlab.com/bff/lmfa0" class="button button-primary">Visit Repository</a>
+          <a href="https://gitlab.com/bff/lmfa0/issues" class="button button-primary">File an Issue</a>
+        </p>
+      </div>
+    </div>
+
+    <footer class="ui-full-width">
+      <div class="container">
+        <div class="row">
+          <p class="twelve column">&copy; 2020 - Bryce Fisher-Fleig</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

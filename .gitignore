@@ -7,3 +7,9 @@
 # standard-version flotsam for automagic changelog generation
 package-lock.json
 node_modules/
+
+# Zola
+docs/public/
+
+# MacOS
+.DS_Store

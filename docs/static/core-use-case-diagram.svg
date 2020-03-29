@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="903.193" height="412.174" viewBox="-0.5 -0.5 903.193 412.174"><style><![CDATA[.B{fill:none}.C{pointer-events:all}.D{text-anchor:middle}.E{font-family:Helvetica}.F{fill:#fff}.G{stroke:#fff}.H{font-size:21.333px}.I{font-size:18px}.J{pointer-events:stroke}.K{stroke-width:2.266}.L{font-size:16px}.M{stroke-width:8}.N{fill:#ee4e4e}.O{stroke-width:6}.P{stroke-miterlimit:10}.Q{stroke-width:8.828}]]></style>
+
+<g stroke-width="2" opacity="0" class="G P unused-arrows"><path d="M533.627 210.59h20q10 0 10 10v120q0 10 10 10h61.76" class="B J"/><path d="M641.387 350.59l-8 4 2-4-2-4z" class="C"/><path d="M533.627 210.59h20q10 0 10 10v40q0 10 10 10h61.76" class="B J"/><path d="M641.387 270.59l-8 4 2-4-2-4z" class="C"/><path d="M543.627 210.59h10q10 0 10-10v-5q0-5 10-5h61.76" class="B J"/><path d="M641.387 190.59l-8 4 2-4-2-4z" class="C"/>
+<animate attributeName="opacity" values="0 ; 0 ; 1 ; 1 ; 0 ; 0" keyTimes="0 ; 0.3 ; 0.4 ; 0.6 ; 0.7 ; 1" dur="15s" repeatCount="0" />
+</g>
+
+<path d="M.656.656h222.97v409.862H.656z" stroke-width="2.312" class="B C G"/>
+<text x="100" y="47" font-weight="bold" class="D E F I"><tspan font-size="32" x="112.04" y="46.089">Git Repo</tspan></text>
+
+<ellipse cx="112.141" cy="102.589" rx="74.086" ry="29.586" stroke="#d79b00" stroke-width="8" class="B C Q">
+<animate attributeName="stroke" values="#ffffff ; #d79b00 ; #d79b00" dur="15s" repeatCount="0" keyTimes="0 ; 0.1 ; 1" />
+<animate attributeName="stroke-width" values="2 ; 8 ; 8" dur="15s" repeatCount="0" keyTimes="0 ; 0.1 ; 1" />
+</ellipse>
+
+<text x="96" y="116" fill="#d79b00" class="D E I">
+<animate attributeName="fill" values="#fff ; #d79b00 ; #d79b00" dur="15s" repeatCount="0" keyTimes="0 ; 0.1 ; 1" />
+
+
+<tspan class="H" x="111.676" y="107.089">docs/</tspan></text><ellipse cx="112.141" cy="182.589" rx="77.367" ry="29.867" class="B C G K"/><text x="96" y="196" class="D E I"><tspan class="F H" x="111.821" y="187.089" fill="#ffffff;" stroke="none">terraform/</tspan></text><ellipse cx="112.141" cy="262.589" rx="76.871" ry="29.871" stroke-width="2.259" class="B C G"/><text x="96" y="276" class="D E I"><tspan class="F H" x="111.799" y="267.089">frontend/</tspan></text><ellipse cx="112.141" cy="342.589" rx="77.367" ry="29.867" class="B C G K"/><text x="96" y="356" class="D E I"><tspan class="F H" x="111.403" y="347.089">backend/</tspan></text><path d="M682.702.73h218.85v408.744h-218.85z" stroke-width="2.281" class="B C G"/><text x="606.13" y="48" font-weight="bold" class="D E I"><tspan font-size="32" class="F" x="792.424" y="47.089">CI</tspan></text>
+
+<ellipse cx="792.127" cy="102.589" rx="74.086" ry="29.586" stroke="#82b366" class="B C Q">
+<animate attributeName="stroke-width" values="2 ; 2 ; 8 ; 8" keyTimes="0 ; 0.7 ; 0.8 ; 1" dur="15s" repeatCount="0"/>
+<animate attributeName="stroke" values="#fff ; #fff ; #82b366 ; #82b366" keyTimes="0 ; 0.7 ; 0.8 ; 1" dur="15s" repeatCount="0"/>
+</ellipse>
+<text x="606" y="116" fill="#82b366" class="D E L"><tspan class="H" x="792.451" y="107.089">jekyll</tspan>
+<animate attributeName="fill" dur="15s" repeatCount="0" values="#fff ; #fff ; #82b366 ; #82b366" keyTimes="0 ; 0.7 ; 0.8; 1" />
+</text>
+
+<ellipse cx="792.127" cy="182.589" rx="77.367" ry="29.867" class="B C G K"/><text x="606" y="196" class="D E L"><tspan class="F H" x="792.619" y="187.089">terraform</tspan></text><ellipse cx="792.127" cy="262.589" rx="77.367" ry="29.867" class="B C G K"/><text x="606" y="276" class="D E L"><tspan class="F H" x="792.639" y="267.089">webpack</tspan></text><ellipse cx="792.127" cy="342.589" rx="77.367" ry="29.867" class="B C G K"/><text x="606" y="356" class="D E L"><tspan class="F H" x="792.193" y="347.089">mocha</tspan></text>
+
+<g stroke-width="2" class="G P">
+
+<g stroke="#d79b00" opacity="1">
+<path d="M261.627 100.59h16q10 0 10 10v90q0 10 8.88 10h8.88" class="B J" />
+<path d="M311.387 210.59l-8 4 2-4-2-4z" fill="#d79b00" class="C"/>
+<animate attributeName="opacity" values="0 ; 0 ; 1; 1" dur="15s" repeatCount="0" keyTimes="0 ; 0.1 ; 0.2 ; 1" />
+</g>
+
+<g class="run-arrow" opacity="1">
+<path d="M533.627 210.59h20q10 0 10-10v-90q0-10 10-10h60.76" stroke="#82b366" class="B J">
+</path>
+<path d="M640.387 100.59l-8 4 2-4-2-4z" stroke="#82b366" fill="#82b366" class="C">
+<animate attributeName="fill" dur="15s" repeatCount="0" values="#fff ; #fff ; #82b366 ; #82b366" keyTimes="0 ; 0.6 ; 0.7; 1"/>
+</path>
+<animate attributeName="opacity" values="0 ; 0 ; 1 ; 1" keyTimes="0 ; 0.3 ; 0.4 ; 1" dur="15s" repeatCount="0" />
+<animate attributeName="stroke" dur="15s" repeatCount="0" values="#fff ; #fff ; #82b366 ; #82b366" keyTimes="0 ; 0.6 ; 0.7; 1"/>
+</g>
+</g>
+
+<g transform="matrix(.477163 0 0 .477163 283.01443 122.18226)">
+<g class="logo">
+<path d="M100.76 100.153h405.637v143.975H100.76z"/>
+<g class="D"><path d="M165.562 218.807q-4.533 0-8-3.2-3.333-3.2-3.333-10.133v-70h-19.6v-10h30.933v79.333q0 2.133 1.067 3.067 1.067.933 3.6.933h17.733v10zm47.342-66.667v3.067q3.467-3.067 8.267-3.067h.8q9.333 0 13.2 5.333 4.4-5.333 11.6-5.333h.8q8.133 0 12 4.133 3.867 4.133 3.867 14.667v47.867H252.77v-48q0-5.467-1.2-7.6-1.067-2.133-5.067-2.133h-.8q-4 0-5.6 2.8-1.467 2.667-1.6 6v48.933h-10.667v-48q0-5.6-1.333-7.6-1.333-2.133-4.8-2.133h-.8q-4 0-5.6 2.4-1.6 2.267-1.733 5.2v50.133h-10.667V152.14zm96.676-16.666q-2.133 0-3.467 1.2-1.2 1.067-1.2 2.8v12.667h21.467v10h-21.467v46.667h16.133v10h-38.8v-10h11.333V162.14h-11.333v-10h11.333v-12q0-6.8 3.867-10.667 3.867-4 10-4h20.267v10zm86.94 83.333q-1.733 0-3.867-1.067-2-1.067-3.467-2.933-3.067 4-8.133 4h-11.867q-10.133 0-14.8-4-4.533-4.133-4.533-14v-2.667q0-20.667 19.467-20.667h16.533v-6.667q0-4.133-2.533-6.4-2.533-2.267-7.467-2.267h-20.667v-10h19.333q11.6 0 17.067 5.067 5.6 5.067 5.6 16.267v32q0 2 1.467 3.067 1.6.933 5.2.933v9.333zm-16.8-10q4 0 5.067-1.867 1.067-1.867 1.067-4.8v-14.667h-16.667q-3.467 0-5.733 2.267-2.267 2.267-2.267 5.733v6.667q0 3.467 1.6 5.067 1.6 1.6 5.067 1.6z" fill="#f8a7a7"/><path d="M472.53 196.14q0 11.067-6.133 16.933-6 5.733-16.267 5.733h-2.667q-10.267 0-16.4-5.733-6-5.867-6-16.933v-48q0-11.2 6-16.933 6-5.733 16.4-5.733h2.667q10.4 0 16.4 5.733 6 5.733 6 16.933zm-11.333-50.533q0-4.133-3.2-7.067-3.067-3.067-7.867-3.067h-2.667q-4.8 0-8 3.067-3.067 2.933-3.067 7.067v36.133zm-24.8 53.067q0 4.133 3.067 7.2 3.2 2.933 8 2.933h2.667q4.8 0 7.867-2.933 3.2-3.067 3.2-7.2v-36z" class="F"/>
+</g>
+<animate attributeName="opacity" values="0 ; 0 ; 1 ; 1" keyTimes="0 ; 0.2 ; 0.3 ; 1" repeatCount="0" dur="15s" />
+</g>
+</g>
+<g stroke="#ee4e4e" opacity="0">
+<circle r="16" cy="190.089" cx="604.127" class="B M"/>
+<path d="M594.127 200.09c20.5-20.5 21-19 21-19" class="N O"/>
+<circle cx="604.127" cy="270.089" r="16" class="B M"/>
+<path d="M594.127 280.09c20.5-20.5 21-19 21-19" class="N O"/>
+<circle r="16" cy="350.089" cx="604.127" class="B M"/>
+<path d="M594.127 360.09c20.5-20.5 21-19 21-19" class="N O"/>
+<animate attributeName="opacity" values="0 ; 0 ; 1 ; 1 ; 0 ; 0" keyTimes="0 ; 0.5 ; 0.55 ; 0.6 ; 0.7 ; 1" dur="15s" repeatCount="0" />
+</g></svg>
