@@ -1,0 +1,26 @@
+header { height: 66px; }
+header div.three { text-align: right; }
+#logo { padding-top: 14px; }
+header a { text-decoration: none; color: black; font-variant: small-caps; line-height: 66px; }
+#hero {
+  background: rgb(152,158,159);
+  background: radial-gradient(circle, rgba(152,158,159,1) 0%, rgba(16,16,20,1) 100%);
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+#hero object { display: block; margin:0 auto; max-width: 960px; width: 90%; height: auto; }
+#concept { background-color: #ccc; padding: 2em 100px; margin-bottom: 2em; }
+#concept h2 { text-align: center; line-height: 1.25em; max-width: 960px; margin: 0 auto; }
+
+#use-cases { text-align: center; margin-top: 3em; border-top: 1px solid black; }
+#use-cases h3 { background: white; max-width: 30%; margin: -0.75em auto 1em auto; }
+#use-cases + .row { border-bottom: 1px solid black; padding-bottom: 2em; margin-bottom: 2em; }
+
+#usage li::marker { font-size: 35px; color: #a0a0a0; font-style: italic; }
+#usage p { margin-top: -30px; }
+#usage pre, #usage p { margin-left: 50px; }
+#usage h3 { margin-top: 1em; }
+
+dt { font-weight: bold; }
+
+footer { color: white; background: #3e3e3e; padding-top:2em; }

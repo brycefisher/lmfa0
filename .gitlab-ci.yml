@@ -1,8 +1,42 @@
 default:
-  image: 'rust:1.42.0-slim-buster'
+  image: 'rust:1.42.0-buster'
 
 stages:
   - build
+  - deploy
+
+variables:
+  ZOLA_VERSION: "v0.10.1"
+
+pages:
+  stage: deploy
+  script:
+    - curl -L https://github.com/getzola/zola/releases/download/$ZOLA_VERSION/zola-$ZOLA_VERSION-x86_64-unknown-linux-gnu.tar.gz > zola.tar.gz
+    - tar -xzf zola.tar.gz
+    - mkdir -p ~/.cargo/bin
+    - mv zola ~/.cargo/bin/
+    - export PATH="~/.cargo/bin:$PATH"
+    - cd docs && zola build --output-dir ../public/
+  artifacts:
+    paths: ['pages/']
+  only:
+    - master
+
+test_pages:
+  stage: build
+  script:
+    - curl -L https://github.com/getzola/zola/releases/download/$ZOLA_VERSION/zola-$ZOLA_VERSION-x86_64-unknown-linux-gnu.tar.gz > zola.tar.gz
+    - tar -xzf zola.tar.gz
+    - mkdir -p ~/.cargo/bin
+    - export PATH="~/.cargo/bin:$PATH"
+    - mv zola ~/.cargo/bin/
+    - cd docs && zola build
+  artifacts:
+    expose_as: 'pages'
+    expire_in: '1 week'
+    paths: ['docs/public/']
+  except:
+    - master
 
 compile_check:
   stage: build
