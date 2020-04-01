@@ -2,4 +2,5 @@ default_branch = "master"
 
 [rules.docs]
 root = "docs/"
-command = "ls"
+pwd = "docs/"
+command = "zola build --output-dir ../public"
