@@ -33,7 +33,10 @@ fn main() -> Result<()> {
         eprintln!("At least one path triggered");
         let pieces: Vec<_> = rule.command.split_whitespace().collect();
         if let ([bin], args) = pieces.split_at(1) {
-            let status = Command::new(bin).args(args).status()?;
+            let status = Command::new(bin)
+                .args(args)
+                .current_dir(&rule.pwd)
+                .status()?;
             if status.success() {
                 config.store(&rule_name, &repo)?;
             }
