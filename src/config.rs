@@ -67,3 +67,27 @@ impl Config {
         self.rules.get(rule)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn example_config_file() -> Result<()> {
+        // Given
+        let raw = r##"
+            [rules.example]
+            root = "example"
+            command = "example"
+        "##;
+
+        // When
+        let config: Config = toml::from_str(raw)?;
+
+        // Then
+        assert_eq!(config.default_branch, String::from("master"));
+        assert_eq!(config.rules["example"].root, PathBuf::from("example"));
+        assert_eq!(config.rules["example"].command, String::from("example"));
+        Ok(())
+    }
+}
