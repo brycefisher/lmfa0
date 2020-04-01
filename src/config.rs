@@ -11,6 +11,12 @@ use crate::Result;
 pub struct Rule {
     pub command: String,
     pub root: PathBuf,
+    #[serde(default = "pwd")]
+    pub pwd: PathBuf,
+}
+
+fn pwd() -> PathBuf {
+    PathBuf::from(".")
 }
 
 #[serde(default)]
@@ -88,6 +94,7 @@ mod tests {
         assert_eq!(config.default_branch, String::from("master"));
         assert_eq!(config.rules["example"].root, PathBuf::from("example"));
         assert_eq!(config.rules["example"].command, String::from("example"));
+        assert_eq!(config.rules["example"].pwd, PathBuf::from("."));
         Ok(())
     }
 }
