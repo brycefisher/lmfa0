@@ -1,6 +1,9 @@
 default:
   image: 'rust:1.42.0-buster'
 
+variables:
+  GIT_STRATEGY: clone
+
 stages:
   - build
   - deploy
