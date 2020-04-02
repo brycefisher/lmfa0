@@ -36,8 +36,8 @@ test_pages:
     - export PATH="~/.cargo/bin:$PATH"
     - mv zola ~/.cargo/bin/
     - git fetch
-    - git --version
-    - git branch --list -vvv
+    - git branch --list --all
+    - git fetch && git checkout $CI_MERGE_REQUEST_SOURCE_BRANCH_NAME
     - ./target/release/lmfa0 docs
   artifacts:
     expose_as: 'pages'
