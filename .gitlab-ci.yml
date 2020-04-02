@@ -37,7 +37,7 @@ test_pages:
     - mv zola ~/.cargo/bin/
     - git fetch
     - git --version
-    - git log master
+    - git branch --list -vvv
     - ./target/release/lmfa0 docs
   artifacts:
     expose_as: 'pages'
