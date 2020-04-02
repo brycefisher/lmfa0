@@ -35,7 +35,9 @@ test_pages:
     - mkdir -p ~/.cargo/bin
     - export PATH="~/.cargo/bin:$PATH"
     - mv zola ~/.cargo/bin/
-    - git fetch && git branch
+    - git fetch
+    - git --version
+    - git log master
     - ./target/release/lmfa0 docs
   artifacts:
     expose_as: 'pages'
