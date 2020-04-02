@@ -126,6 +126,18 @@ command = "terraform apply"</code></pre>
       <div class="row">
         <h3>FAQ</h3>
         <dl>
+          <dt>In what scenarios is lmfa0 a bad fit?</dt>
+          <dd>
+          <ul>
+            <li>If you're happy with your existing CI performance, lmfa0 is a waste of time.</li>
+            <li>If all of your CI runs always do the exact same thing, lmfa0 won't help at all.</li>
+            <li>If you already use a fancy build tool like Bazel or Buck to avoid wasting CPU to rebuild an unchanged artifact, lmfa0 is a step backwards for you.</li>
+            <li>If you can't easily reason about the dependencies between different directories, lmfa0 might not be safe for you</li>
+            </ul>
+            <p>Basically, lmfa0 allows you to get some of the same benefits of Make but across runs in your CI pipeline. If a source file hasn't changed, don't recompile it.</p>
+            <p>A fancier build tool like Bazel does a whole lot more, but requires more effort to setup and maintain. It also seems to make sense only when managed as a shared resource for sizable engineering team with cross dependencies. If Bazel is too much for you, lmfa0 might be just right. lmfa0 excels in cases where you have a small number of microservices and a small number of developers, and you want something easy to setup that will instantly save you time in your CI runs. If you need more, lmfa0 might not be powerful for you.</p>
+            <p>I built this tool out of my own personal need to make CI pipelines more efficient for small teams of 2 - 10 people working on separate but tightly connected systems without spinning up a separate database that I had to manage.</p>
+          </dd>
           <dt>Why do you need lmfa0 to generate this diff?</dt>
           <dd>
             <p>lmfa0 solves the problem of figuring out what to diff against in two important cases:
