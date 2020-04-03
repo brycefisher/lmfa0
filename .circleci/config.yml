@@ -19,9 +19,9 @@ jobs:
       - run:
           name: cargo fetch
           command: |
-            cargo fetch
-            ls -lah /home/circleci/.cargo/
-            ls -lah /home/circleci/.cargo/registry/cache/github*/
+            echo $CARGO_HOME
+            echo $HOME
+            ls $HOME/.cargo
 
       - run:
           name: cargo build
