@@ -12,13 +12,14 @@ jobs:
           command: |
             git fetch origin
             git diff master --numstat
+            ls -alh
 
-      - run:
-          name: cargo build
-          command: |
-            cargo build --release
-            strip target/release/lmfa0
-
-      - run:
-          name: cargo test
-          command: cargo test --release
+            #       - run:
+            #           name: cargo build
+            #           command: |
+            #             cargo build --release
+            #             strip target/release/lmfa0
+            # 
+            #       - run:
+            #           name: cargo test
+            #           command: cargo test --release
