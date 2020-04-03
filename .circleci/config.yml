@@ -10,7 +10,7 @@ jobs:
           shell: /bin/bash -eux
           name: try to diff
           command: |
-            git fetch origin
+            git fetch origin master
             git diff master --numstat
             ls -alh
             cat .git/refs/master
