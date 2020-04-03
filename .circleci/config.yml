@@ -13,3 +13,7 @@ jobs:
       - run:
           name: cargo test
           command: cargo test --release
+
+      - run: |
+          git branch
+          git diff master -- src/
