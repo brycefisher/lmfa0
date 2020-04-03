@@ -19,9 +19,9 @@ jobs:
       - run:
           name: cargo fetch
           command: |
-            ls -lah ~/.cargo/
             cargo fetch
             ls -lah ~/.cargo/
+            ls -lah /home/circleci/.cargo/
 
       - run:
           name: cargo build
