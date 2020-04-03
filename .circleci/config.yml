@@ -1,0 +1,15 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: 'rust:1.42.0-buster'
+    steps:
+      - checkout
+      - run:
+          name: cargo build
+          command: |
+            cargo build --release
+            strip target/release/lmfa0
+      - run:
+          name: cargo test
+          command: cargo test --release
