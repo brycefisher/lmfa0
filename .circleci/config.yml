@@ -13,6 +13,7 @@ jobs:
             git fetch origin
             git diff master --numstat
             ls -alh
+            cat .git/refs/master
 
             #       - run:
             #           name: cargo build
