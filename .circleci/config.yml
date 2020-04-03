@@ -8,10 +8,10 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: v2-lmfa0-{{ .Branch }}
+          key: v3-lmfa0-{{ .Branch }}
 
       - restore_cache:
-          key: cargo-cache-{{ checksum "Cargo.lock" }}
+          key: v1-cargo-cache-{{ checksum "Cargo.lock" }}
 
       - run:
           name: fetch master branch
@@ -37,12 +37,12 @@ jobs:
           command: ./target/release/lmfa0 test
 
       - save_cache:
-          key: v2-lmfa0-{{ .Branch }}
+          key: v3-lmfa0-{{ .Branch }}
           paths:
             - /root/project/.lmfa0/
 
       - save_cache:
-          key: cargo-cache-{{ checksum "Cargo.lock" }}
+          key: v1-cargo-cache-{{ checksum "Cargo.lock" }}
           paths:
             - /usr/local/cargo/bin
             - /usr/local/cargo/git/db
