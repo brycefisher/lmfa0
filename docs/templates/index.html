@@ -97,6 +97,11 @@
       - /home/circleci/project/.lmfa0/{% endraw %}</code></pre>
           </li>
           <li class="row">
+            <p>Make sure CI has fetched your default branch before invoking any rules:</p>
+<pre><code>{% raw %}# .circleci/config.yaml
+- run: git fetch origin master{% endraw %}</code></pre>
+          </li>
+          <li class="row">
             <p>Create a lmfa0.toml file</p>
           </li>
         </ol>
