@@ -8,17 +8,18 @@ jobs:
 
       - run:
           shell: /bin/bash -eux
-          name: try to diff
+          name: fetch master branch
           command: |
             git fetch origin master
-            git diff origin/master --numstat
 
-            #       - run:
-            #           name: cargo build
-            #           command: |
-            #             cargo build --release
-            #             strip target/release/lmfa0
-            # 
-            #       - run:
-            #           name: cargo test
-            #           command: cargo test --release
+      - run:
+          name: cargo build
+          command: |
+            cargo build --release
+            strip target/release/lmfa0
+
+      - run: ./target/release/lmfa0 docs
+ 
+      - run:
+          name: cargo test
+          command: cargo test --release
