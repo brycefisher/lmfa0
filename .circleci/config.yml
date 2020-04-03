@@ -10,7 +10,7 @@ jobs:
       - restore_cache:
           keys:
             - lmfa0-{{ .Branch }}
-            - v1-cargo-cache
+            - v2-cargo-cache
       - run:
           name: fetch master branch
           command: |
@@ -36,7 +36,7 @@ jobs:
             - /home/circleci/project/.lmfa0/
 
       - save_cache:
-          key: v1-cargo-cache
+          key: v2-cargo-cache
           paths:
             - /usr/local/cargo/bin
             - /usr/local/cargo/git/db
