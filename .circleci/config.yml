@@ -27,6 +27,7 @@ jobs:
       - run: |
           ./target/release/lmfa0 docs
           mkdir -p .lmfa0/
+          ls .lmfa0/
           touch ".lmfa0/$(date '+%Y-%m-%dT%H:%M:%S')"
  
       - run:
@@ -39,10 +40,13 @@ jobs:
             - /root/project/.lmfa0/
 
       - save_cache:
-          key: v2-cargo-cache
+          key: cargo-cache-{{ checksum "Cargo.lock" }}
           paths:
             - /usr/local/cargo/bin
             - /usr/local/cargo/git/db
             - /usr/local/cargo/registry/cache
             - /usr/local/cargo/registry/index
+            - /root/project/target/release/build/
+            - /root/project/target/release/deps/
+            - /root/project/target/release/.fingerprint/
           when: always
