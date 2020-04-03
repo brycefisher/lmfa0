@@ -15,9 +15,6 @@ jobs:
           name: fetch master branch
           command: |
             git fetch origin master
-            pwd
-            ls .lmfa0/
-            touch "~/project/.lmfa0/$(date)"
 
       - run: cargo fetch
 
@@ -27,7 +24,10 @@ jobs:
             cargo build --release --offline
             strip target/release/lmfa0
 
-      - run: ./target/release/lmfa0 docs
+      - run: |
+          ./target/release/lmfa0 docs
+          mkdir -p .lmfa0/
+          touch ".lmfa0/$(date '+%Y-%m-%dT%H:%M:%S')"
  
       - run:
           name: cargo test
