@@ -21,6 +21,13 @@ jobs:
             git fetch origin master
 
       - run:
+          name: cargo fetch
+          command: |
+            ls -lah ~/.cargo/
+            cargo fetch
+            ls -lah ~/.cargo/
+
+      - run:
           name: cargo build
           command: |
             cargo build --release
