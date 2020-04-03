@@ -9,7 +9,7 @@ jobs:
 
       - restore_cache:
           keys:
-            - lmfa0-{{ .Branch }}
+            - v2-lmfa0-{{ .Branch }}
             - v2-cargo-cache
       - run:
           name: fetch master branch
@@ -34,9 +34,9 @@ jobs:
           command: ./target/release/lmfa0 test
 
       - save_cache:
-          key: lmfa0-{{ .Branch }}
+          key: v2-lmfa0-{{ .Branch }}
           paths:
-            - /home/circleci/project/.lmfa0/
+            - /root/project/.lmfa0/
 
       - save_cache:
           key: v2-cargo-cache
