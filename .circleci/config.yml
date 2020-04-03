@@ -16,17 +16,12 @@ jobs:
           command: |
             git fetch origin master
 
-      - run:
-          name: cargo fetch
-          command: |
-            echo $CARGO_HOME
-            echo $HOME
-            ls $HOME/.cargo
+      - run: cargo fetch
 
       - run:
           name: cargo build
           command: |
-            cargo build --release
+            cargo build --release --offline
             strip target/release/lmfa0
 
       - run: ./target/release/lmfa0 docs
@@ -43,5 +38,8 @@ jobs:
       - save_cache:
           key: v1-cargo-cache
           paths:
-            - /home/circleci/.cargo
+            - /usr/local/cargo/bin
+            - /usr/local/cargo/git/db
+            - /usr/local/cargo/registry/cache
+            - /usr/local/cargo/registry/index
           when: always
