@@ -5,15 +5,20 @@ jobs:
       - image: 'rust:1.42.0-buster'
     steps:
       - checkout
+
+      - run:
+          shell: /bin/bash -eux
+          name: try to diff
+          command: |
+            git fetch origin
+            git diff master --numstat
+
       - run:
           name: cargo build
           command: |
             cargo build --release
             strip target/release/lmfa0
+
       - run:
           name: cargo test
           command: cargo test --release
-
-      - run: |
-          git branch
-          git diff master -- src/
