@@ -15,8 +15,9 @@ jobs:
           name: fetch master branch
           command: |
             git fetch origin master
+            pwd
             ls .lmfa0/
-            touch ".lmfa0/$(date)"
+            touch "~/project/.lmfa0/$(date)"
 
       - run: cargo fetch
 
