@@ -11,9 +11,7 @@ jobs:
           name: try to diff
           command: |
             git fetch origin master
-            git diff master --numstat
-            ls -alh
-            cat .git/refs/master
+            git diff origin/master --numstat
 
             #       - run:
             #           name: cargo build
