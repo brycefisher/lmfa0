@@ -3,3 +3,7 @@ default_branch = "master"
 [rules.docs]
 root = "docs/"
 command = "ls"
+
+[rules.test]
+root = "src/"
+command = "cargo test --release"

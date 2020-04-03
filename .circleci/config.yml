@@ -26,7 +26,7 @@ jobs:
  
       - run:
           name: cargo test
-          command: cargo test --release
+          command: ./target/release/lmfa0 test
 
       - save_cache:
           key: lmfa0-{{ .Branch }}
