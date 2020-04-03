@@ -1,6 +1,7 @@
 version: 2.1
 jobs:
   build:
+    shell: /bin/bash -euxo pipefail
     docker:
       - image: 'rust:1.42.0-buster'
     steps:
@@ -11,7 +12,6 @@ jobs:
             - lmfa0-{{ .Branch }}
             - v1-cargo-cache
       - run:
-          shell: /bin/bash -eux
           name: fetch master branch
           command: |
             git fetch origin master
