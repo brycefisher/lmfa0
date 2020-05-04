@@ -11,7 +11,10 @@ pub struct TableClient {
 impl TableClient {
     /// Creates a TableClient scoped to a particular branch name and job.
     pub fn new(branch: impl Into<String>, job: impl Into<String>) -> TableClient {
-        todo!();
+        TableClient {
+            branch: branch.into(),
+            job: job.into()
+        }
     }
 
     /// Fetches the Git SHA from Azure Storage Table
@@ -22,5 +25,18 @@ impl TableClient {
     /// Updates the Git SHA from Azure Storage Table
     pub fn save(&self, sha: Oid) -> Result<()> {
         todo!();
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn new_client() {
+        assert_eq!(
+            TableClient { branch: "master".into(), job: "test".into() },
+            TableClient::new("master", "test")
+        );
     }
 }
