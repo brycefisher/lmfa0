@@ -4,6 +4,7 @@ use git2::Repository;
 
 use config::Config;
 
+mod azure_table;
 mod config;
 mod diff;
 
