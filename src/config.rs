@@ -30,9 +30,13 @@ impl Default for Config {
 }
 
 impl Config {
+    pub fn from_str(raw_toml: impl AsRef<str>) -> Result<Config> {
+        toml::from_str(raw_toml.as_ref()).map_err(From::from)
+    }
+
     pub fn load() -> Result<Config> {
         match fs::read_to_string("lmfa0.toml") {
-            Ok(raw_toml) => toml::from_str(raw_toml.as_str()).map_err(From::from),
+            Ok(raw_toml) => Config::from_str(raw_toml),
             Err(_) => Ok(Config::default()),
         }
     }
