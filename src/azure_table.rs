@@ -1,42 +1,73 @@
-use std::convert::TryInto;
 use git2::Oid;
 
 use crate::Result;
 
-pub trait StorageTable {}
+/// For dependency injection for the "real" backend client into `Client`
+pub trait StorageTable {
+    /// Read the git sha ("Oid") from table storage.
+    fn get(&self, partition_key: &str, row_key: &str) -> Result<Option<String>>;
 
+    /// Update or insert the provided git sha ("Oid") into table storage.
+    fn upsert(&self, partition_key: &str, row_key: &str, oid: String) -> Result<()>;
+}
+
+/// High level client between lmfa0 and Azure Table Storage backend
 pub struct Client<'c> {
-    branch: String,
+    /// Used as row key in Table Storage
     job: String,
+    /// "real" client used to interact with Azure
     table: &'c dyn StorageTable,
 }
 
 impl<'c> Client<'c> {
     /// Creates a StorageTableClient scoped to a particular branch name and job.
-    pub fn new(branch: impl Into<String>, job: impl Into<String>, table: impl TryInto<&'c dyn StorageTable, Error=crate::Error>) -> Result<Client<'c>> {
+    pub fn new(job: impl Into<String>, table: &'c dyn StorageTable) -> Result<Client<'c>> {
         /*
         let AzureTableConfig { account, sas, table } = config.azure_table_config()?;
         let client = TableClient::azure_sas(&account, &sas)?;
         let cloud_table = CloudTable::new(client, table);
         */
         Ok(Client {
-            branch: branch.into(),
             job: job.into(),
-            table: table.try_into()?,
+            table,
         })
     }
 
     /// Fetches the Git SHA from Azure Storage Table
-    pub fn get(&self) -> Result<Oid> {
-        todo!();
+    pub fn get(&self, branch: impl AsRef<str>) -> Result<Option<Oid>> {
+        let oid = self.table
+            .get(branch.as_ref(), &self.job)?
+            .map(|x| Oid::from_str(x.as_ref()));
+        match oid {
+            Some(result) => Ok(Some(result?)),
+            None => Ok(None),
+        }
     }
 
     /// Updates the Git SHA from Azure Storage Table
-    pub fn save(&self, sha: Oid) -> Result<()> {
+    pub fn upsert(&self, sha: Oid) -> Result<()> {
         todo!();
     }
 }
 
 #[cfg(test)]
 mod test {
+    use super::*;
+
+    #[test]
+    fn get_none() {
+        // Given
+        struct StorageTableClient;
+        impl StorageTable for StorageTableClient {
+            fn get(&self, _: &str, _: &str) -> Result<Option<String>> { Ok(None) }
+            fn upsert(&self, _: &str, _: &str, _: String) -> Result<()> { todo!(); }
+        }
+        let client = Client::new("docs", &StorageTableClient).unwrap();
+
+        // When
+        let out = client.get("master");
+
+        // Then
+        assert!(matches!(out, Ok(None)));
+    }
 }
