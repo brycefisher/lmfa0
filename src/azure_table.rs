@@ -46,7 +46,8 @@ impl<'c> Client<'c> {
 
     /// Updates the Git SHA from Azure Storage Table
     pub fn upsert(&self, branch: impl AsRef<str>, sha: Oid) -> Result<()> {
-        todo!();
+        let val = format!("{}", sha);
+        self.table.upsert(branch.as_ref(), &self.job, val)
     }
 }
 
@@ -88,5 +89,23 @@ mod test {
 
         // Then
         assert!(matches!(out, Ok(Some(_))));
+    }
+
+    #[test]
+    fn upsert_ok() {
+        // Given
+        struct StorageTableClient;
+        impl StorageTable for StorageTableClient {
+            fn get(&self, _: &str, _: &str) -> Result<Option<String>> { todo!(); }
+            fn upsert(&self, _: &str, _: &str, _: String) -> Result<()> { Ok(()) }
+        }
+        let client = Client::new("docs", &StorageTableClient).unwrap();
+        let oid = Oid::from_str("65b4f6f5df0603ed4d83d648837a68160b4f3719").unwrap();
+
+        // When
+        let out = client.upsert("master", oid);
+
+        // Then
+        assert!(matches!(out, Ok(())));
     }
 }
