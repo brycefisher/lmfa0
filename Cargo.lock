@@ -578,6 +578,7 @@ dependencies = [
  "azure_sdk_storage_table",
  "git2",
  "serde",
+ "tokio",
  "toml",
 ]
 
